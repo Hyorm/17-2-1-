@@ -1,99 +1,91 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "course.h"
 
 using namespace std;
 
-		course(){};
+		course::course(){};
 
-		~course(){};
+		course::~course(){};
 
-		void setName(string name){
+		void course::setName(string name){
 
 			this->name = name;
 
 		}
 
-		void setProf(string prof){
+		void course::setProf(string prof){
 		
 			this->prof = prof;
 
 		}
 
-		void setCode(string code){
+		void course::setCode(string code){
 
 			this->code = code;
 
 		}
 
-		void setDayOfWeek(int num, string week){
+		void course::setWeek(int num, string (*week)[5]){
 
-			this->dayOfWeek[num] = week;
-
-		}
-
-
-		void setPeriod(int num, int period){
-
-			this->period[num] = preriod;
+			this->week[num][0] = week[num+1][0];
+			this->week[num][1] = week[num+1][1];
+			this->week[num][2] = week[num+1][2];
+			this->week[num][3] = week[num+1][3];
+			this->week[num][4] = week[num+1][4];
 
 		}
 
-		void setCredits(int credits){
+		void course::setCredits(string credits){
 
-			this->credits = credits;
+			this->credits = atoi(credits.c_str());
 
 		}
 
-		void setPriority(int priority){
+		void course::setPriority(int priority){
 	
 			this->priority = priority;
 
 		}
 
-		void getInfo(){
+		void course::getInfo(){
 
-			cout<<setw(17)<<this->name<<setw(11)<<this->prof<<setw(6)<<dayOfWeek[0]<<","<<dayOfWeek[1]<<"/"<<this->period[0]<<","<<this->period[1]<<<<setw(8)<<this->credit<<setw(6)<<this->code<<endl;
+			cout<<setw(17)<<this->name<<setw(11)<<this->prof<<setw(6)<<this->week[0][0]<<","<<this->week[1][0]<<","<<this->week[2][0]<<setw(6)<<this->credits<<setw(6)<<this->code<<endl;
 
 		}
 
-		string getName(){
+		string course::getName(){
 
 			return this->name;
 
 		}
 
-		string getProf(){
+		string course::getProf(){
 
 			return this->prof;
 
 		}
 
-		string getCode(){
+		string course::getCode(){
 
 			return this->code;
 
 		}
 
-		string getDayOfWeek(int num){
+		string* course::getWeek(int num){
 
-			return this->dayOfWeek[num];
-
-		}
-
-		int getPeriod(){
-
-			return this->period;
+			return this->week[num];
 
 		}
 
-		int getCredits(){
+		int course::getCredits(){
 
 			return this->credits;
 
 		}
 
-		int getPriority(){
+		int course::getPriority(){
 
 			return this->priority;
 

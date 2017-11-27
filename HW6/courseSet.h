@@ -22,7 +22,11 @@ class courseSet{
 
 		course getCourseSet(int num);
 
-		void setCourseSet();
+		void deleteCourse(string code);
+
+		int getCourseNum();
+
+		string setCourseSet(string (*arg)[5]);
 };
 
 #endif

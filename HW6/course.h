@@ -13,10 +13,9 @@ class course{
 		string name;
 		string prof;
 		string code;
-		string dayOfWeek[2] = {"x"};
-		int period;
+		string week[3][5] = {{"x", "0", "0", "0", "0"}, {"x", "0", "0", "0", "0"}, {"x", "0", "0", "0", "0"}};
 		int credits;
-		int priority[2];
+		int priority;
 
 	public:
 		course();
@@ -29,11 +28,9 @@ class course{
 
 		void setCode(string code);
 
-		void setDayOfWeek(int num, string week);
+		void setWeek(int num, string (*week)[5]);
 
-		void setPeriod(int num, int period);
-
-		void setCredits(int credits);
+		void setCredits(string credits);
 
 		void setPriority(int priority);
 
@@ -45,9 +42,7 @@ class course{
 
 		string getCode();
 
-		string getDayOfWeek(int num);
-
-		int getPeriod();
+		string* getWeek(int num);
 
 		int getCredits();
 

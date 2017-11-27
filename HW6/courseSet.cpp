@@ -5,29 +5,81 @@
 
 using namespace std;
 
-		courseSet(){}
+		courseSet::courseSet(){}
 
-		~courseSet(){}
+		courseSet::~courseSet(){}
 
-		course getCourseSet(int num){
+		course courseSet::getCourseSet(int num){
 
 			return this->list[num];
 
 		}
 
-		void setCourseSet(){
+		int courseSet::getCourseNum(){
+			
+			return this->listNum;
+
+		}
+
+		void courseSet::deleteCourse(string code){
+
+			for(int i=0;i<listNum;i++){
+
+				if(list[i].getCode()==code){
+					
+					list[i] = list[i+1];
+
+				}
+			}
+			listNum--;
+
+			cout<<"Delete!"<<endl;
+		}
+
+		string courseSet::setCourseSet(string (*arg)[5]){
+
+			int day, per, cre;
+			string yORn;
 
 			if(listNum>30){
 
 				cout<<"Cart was full...";
 
-				break;
+				return "F";
 			}
 
-//TODO:SET COURSE
+//TODO:SET CODE
+			if(listNum==0)
+				list[listNum].setCode(arg[0][1]);
+			
+			for(int i=0;i<listNum;i++){
+			
+				if(list[i].getCode()==arg[0][1]){
+
+					cout<<"This course already exists."<<endl;
+	
+					return "F";
+				}
+				else{
+
+					list[listNum].setCode(arg[0][1]);
+				}
+			}
+//TODO:SET NAME
+			list[listNum].setName(arg[0][2]);
+//TODO:SET PROF
+			list[listNum].setProf(arg[0][3]);
+//TODO:SET WEEK		
+			list[listNum].setWeek(0, arg);
+
+			list[listNum].setWeek(1, arg);
+
+			list[listNum].setWeek(2, arg);
+//TODO:CRED		
+			list[listNum].setCredits(arg[0][4]);		
 
 //TODO:SET PRIORITY
-			repeat = 1;
+			int repeat = 1;
 
 			while(repeat){
 				cout<<endl<<"Is this course a major?(Y/N)";
@@ -39,6 +91,7 @@ using namespace std;
 					while(repeat){
 
 						cout<<endl<<"Do you really have to take this course this semester?(Y/N)";
+						cin>>yORn;
 
 						if(yORn=="Y"){
 
@@ -62,6 +115,8 @@ using namespace std;
 					while(repeat){
 
 						cout<<endl<<"Is this course in practical English?(Y/N)";
+
+						cin>>yORn;
 
 						if(yORn=="Y"){
 
@@ -96,6 +151,8 @@ using namespace std;
 			}
 
 			listNum++;
+
+			return "S";
 		}
 
 
