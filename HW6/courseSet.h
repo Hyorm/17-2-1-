@@ -24,6 +24,8 @@ class courseSet{
 
 		void deleteCourse(string code);
 
+		course* getPrioritySet(int num);
+
 		int getCourseNum();
 
 		string setCourseSet(string (*arg)[5]);

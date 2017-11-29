@@ -27,13 +27,32 @@ using namespace std;
 
 				if(list[i].getCode()==code){
 					
-					list[i] = list[i+1];
-
+					for(int j = i; j< listNum; j++)
+						list[i] = list[i+1];
+				
+					listNum--;
+					break;
 				}
 			}
-			listNum--;
 
 			cout<<"Delete!"<<endl;
+		}
+
+		course* courseSet::getPrioritySet(int num){
+
+			static course prioritySet[20];
+
+			int setNum = 0;
+
+			for(int i=0;i<listNum;i++){
+
+				if(list[i].getPriority()==num){
+
+					prioritySet[setNum] = list[i];
+					setNum++;
+				}
+			}
+			return prioritySet;
 		}
 
 		string courseSet::setCourseSet(string (*arg)[5]){

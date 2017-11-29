@@ -42,7 +42,7 @@ class course{
 
 		string getCode();
 
-		string* getWeek(int num);
+		string * getWeek(int num);
 
 		int getCredits();
 

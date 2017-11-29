@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "course.h"
 #include "courseSet.h"
+#include "timeTable.h"
 
 using namespace std;
 
@@ -14,7 +15,13 @@ int main(){
 
 	courseSet newCart = courseSet();
 
+	timeTable newTable = timeTable();
+
 	int exit = 1;
+
+	int sameNum = 0;
+
+	string * same;
 
 	while(exit){
 
@@ -41,10 +48,24 @@ int main(){
 				break;
 
 		case 'D':	newCart.deleteCourse(arg[0][1]);
+				newTable.resetSet();	
+				break;
 
-		case 'M':
+		case 'M':	newTable.setMax(atoi(arg[0][1].c_str()));
+				newTable.setMin(atoi(arg[0][2].c_str()));
+				newTable.setTimeTable(newCart);
+				newTable.getTimeTable();
+
+				same = newTable.getSameList();
+				sameNum = 0;
+				while(same[sameNum].length()>0){
+					cout<<"Overlap: "<<same[sameNum]<<"/"<<same[sameNum+1]<<endl;
+					sameNum += 2;
+				}
+				break;				
 
 		case 'P':	if(arg[0][1][0]=='T'){
+					newTable.getTimeTable();
 					break;
 				}else if(arg[0][1][0]=='C'){
 					int num = newCart.getCourseNum();
@@ -125,12 +146,14 @@ string (*getArg(string line))[5]{
 						while(repeat){
 
 							parsArg3 = line.find(",");
+
+							if(parsArg3==-1)parsArg3 = 50;
 						
 							parsArg2 = line.find("/");
 
 							parsArg = line.find(";");
 
-							if((parsArg2!=-1)&&(parsArg>parsArg2)){
+							if((parsArg2!=-1)&&(parsArg>parsArg2)&&(parsArg3>parsArg2)){
 
 								arg[argNum2][argNum22]=line.substr(0, parsArg2);
 								line.erase(0, parsArg2+1);
@@ -138,9 +161,10 @@ string (*getArg(string line))[5]{
 								
 							}else{
 								
-								if(parsArg3!=-1){
+								if(parsArg3!=50){
 									arg[argNum2][argNum22]=line.substr(0, 1);
 									line.erase(0, 3);
+
 									break;
 								}
 								else{
